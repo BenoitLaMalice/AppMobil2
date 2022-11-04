@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppMobile</string>
+    <string name="discover">Discover</string>
+    <string name="manga_list">MangaList</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="setting">Setting</string>
+    <string name="back_button">Back</string>
+
+</resources>
