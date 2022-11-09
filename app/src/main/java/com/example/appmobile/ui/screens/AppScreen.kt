@@ -103,11 +103,11 @@ fun AppScreen(modifier: Modifier = Modifier){
         }) {
             innerPadding ->
         NavHost(navController, startDestination = Screen.Profile.route, Modifier.padding(innerPadding)) {
-            composable(Screen.Profile.route){}
-            composable(Screen.MangaList.route) {}
-            composable(Screen.Discover.route){}
-            composable(Screen.Home.route){}
-            composable(Screen.Settings.route){}
+            composable(Screen.Profile.route){ Profile(navController = navController, Modifier.padding(innerPadding))}
+            composable(Screen.MangaList.route) { MangaList(navController = navController, Modifier.padding(innerPadding))}
+            composable(Screen.Discover.route){ Discover(navController = navController, Modifier.padding(innerPadding))}
+            composable(Screen.Home.route){ Home(navController = navController, Modifier.padding(innerPadding))}
+            composable(Screen.Settings.route){ Setting(navController = navController, Modifier.padding(innerPadding))}
         }
     }
 }

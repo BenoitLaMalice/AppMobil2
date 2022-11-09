@@ -32,7 +32,7 @@ class SplashActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting("AAAAAAAAAAAAA")
                 }
             }
         }
@@ -41,5 +41,5 @@ class SplashActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello pd!")
+    Text(text = "Bonjour $name!")
 }
