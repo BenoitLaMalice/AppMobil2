@@ -1,24 +1,40 @@
 package com.example.appmobile.data.repositories
 
 import com.example.appmobile.data.models.MangaModel
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 interface MangaSource{
-    fun GetMangas(): List<MangaModel>
+    suspend fun GetRandomManga(): MangaModel
 }
 
 interface  MangaRepository{
-    fun GetMangas(): List<MangaModel>
-    fun GetMangasFromCache(): List<MangaModel>
+    suspend fun GetRandomManga(): MangaModel
+    suspend fun GetRandomMangaFromCache(): MangaModel
 }
 
-class DefaultMangaRepository(val mangaSource : MangaSource) : MangaRepository{
-    override fun GetMangas(): List<MangaModel> {
-        TODO("Not yet implemented")
+class DefaultMangaRepository() : MangaRepository{
+    @Inject
+    lateinit var mangaSource:MangaSource
+    override suspend fun  GetRandomManga(): MangaModel {
+        return mangaSource.GetRandomManga()
     }
 
-    override fun GetMangasFromCache(): List<MangaModel> {
+    override suspend fun GetRandomMangaFromCache(): MangaModel {
         TODO("Not yet implemented")
     }
-
+}
+@InstallIn(SingletonComponent::class)
+@Module
+object MangaRepositoryModule{
+    @Provides
+    @Singleton
+    fun provideMangaRepo():MangaRepository{
+        return DefaultMangaRepository()
+    }
 }

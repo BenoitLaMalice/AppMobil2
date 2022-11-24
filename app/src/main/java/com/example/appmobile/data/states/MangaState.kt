@@ -6,8 +6,8 @@ import java.time.LocalDateTime
 import java.util.*
 
 
-data class MangaState @RequiresApi(Build.VERSION_CODES.O) constructor(
+data class MangaState  constructor(
     val name:String="",
-    val tome:String="",
-    val date:String="",
+    val tome:Int =0 ,
+    //val date:String="",
 )

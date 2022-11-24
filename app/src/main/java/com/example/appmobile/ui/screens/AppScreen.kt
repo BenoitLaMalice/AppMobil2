@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.example.appmobile.R
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -106,7 +107,7 @@ fun AppScreen(modifier: Modifier = Modifier){
             composable(Screen.Profile.route){ Profile(navController = navController, Modifier.padding(innerPadding))}
             composable(Screen.MangaList.route) { MangaList(navController = navController, Modifier.padding(innerPadding))}
             composable(Screen.Discover.route){ Discover(navController = navController, Modifier.padding(innerPadding))}
-            composable(Screen.Home.route){ Home(navController = navController, Modifier.padding(innerPadding))}
+            composable(Screen.Home.route){ Home(navController = navController,Modifier.padding(innerPadding))}
             composable(Screen.Settings.route){ Setting(navController = navController, Modifier.padding(innerPadding))}
         }
     }
