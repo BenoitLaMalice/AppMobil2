@@ -10,30 +10,25 @@ import javax.inject.Singleton
 
 
 interface MangaSource{
-    suspend fun GetRandomManga(): MangaModel
+    suspend fun GetRandom(): MangaModel
 }
 
 interface  MangaRepository{
     suspend fun GetRandomManga(): MangaModel
-    suspend fun GetRandomMangaFromCache(): MangaModel
 }
 
 class DefaultMangaRepository() : MangaRepository{
     @Inject
     lateinit var mangaSource:MangaSource
     override suspend fun  GetRandomManga(): MangaModel {
-        return mangaSource.GetRandomManga()
+        return mangaSource.GetRandom()
     }
 
-    override suspend fun GetRandomMangaFromCache(): MangaModel {
-        TODO("Not yet implemented")
-    }
 }
 @InstallIn(SingletonComponent::class)
 @Module
 object MangaRepositoryModule{
     @Provides
-    @Singleton
     fun provideMangaRepo():MangaRepository{
         return DefaultMangaRepository()
     }

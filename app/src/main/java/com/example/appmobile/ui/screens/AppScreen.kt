@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 
 sealed class Screen(val route: String, @StringRes val resourceId: Int, val icon : ImageVector){
     object Discover : Screen("discover", R.string.discover, Icons.Filled.Search)
@@ -82,6 +83,7 @@ fun BottomBar(navController: NavController, modifier: Modifier = Modifier, onNav
 
 @Composable
 fun AppScreen(modifier: Modifier = Modifier){
+
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     var currentScreenTitle by remember {
@@ -104,11 +106,20 @@ fun AppScreen(modifier: Modifier = Modifier){
         }) {
             innerPadding ->
         NavHost(navController, startDestination = Screen.Profile.route, Modifier.padding(innerPadding)) {
-            composable(Screen.Profile.route){ Profile(navController = navController, Modifier.padding(innerPadding))}
-            composable(Screen.MangaList.route) { MangaList(navController = navController, Modifier.padding(innerPadding))}
-            composable(Screen.Discover.route){ Discover(navController = navController, Modifier.padding(innerPadding))}
-            composable(Screen.Home.route){ Home(navController = navController,Modifier.padding(innerPadding))}
-            composable(Screen.Settings.route){ Setting(navController = navController, Modifier.padding(innerPadding))}
+            HomeNavigation(navController = navController, modifier = modifier, onTitleChanged = {
+
+            }, onCanNavigateBackChange ={
+
+            }
+
+            )
+
+            composable(Screen.Profile.route){ Profile(navController, Modifier)}
+            composable(Screen.Home.route) { Home( navController, Modifier)}
+            composable(Screen.Discover.route){ Discover( navController, Modifier)}
+
+
+            composable(Screen.Settings.route){ Setting( navController, Modifier)}
         }
     }
 }

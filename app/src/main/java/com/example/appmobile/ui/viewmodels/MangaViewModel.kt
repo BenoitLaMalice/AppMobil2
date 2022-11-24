@@ -2,11 +2,9 @@ package com.example.appmobile.ui.viewmodels
 
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.appmobile.MobileApplication
+
 import com.example.appmobile.data.repositories.MangaRepository
 import com.example.appmobile.data.states.MangaState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +22,7 @@ class MangaViewModel @Inject constructor(private val mangaRepository:MangaReposi
     private fun getManga(){
         viewModelScope.launch {
         try {
-            val randomManga=mangaRepository.GetRandomManga()
+            val randomManga = mangaRepository.GetRandomManga()
             _uiState.emit(MangaState(randomManga.name,randomManga.tome))
         }catch (e:Exception){
 

@@ -6,5 +6,6 @@
     <string name="home">Home</string>
     <string name="setting">Setting</string>
     <string name="back_button">Back</string>
+    <string name="random_manga">Random Manga</string>
 
 </resources>

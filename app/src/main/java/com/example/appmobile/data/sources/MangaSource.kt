@@ -1,5 +1,6 @@
 package com.example.appmobile.data.sources
 
+
 import com.example.appmobile.data.models.MangaModel
 import com.example.appmobile.data.repositories.DefaultMangaRepository
 import com.example.appmobile.data.repositories.MangaRepository
@@ -14,6 +15,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import javax.inject.Singleton
 
 
 object OnlineMangaSources : MangaSource {
@@ -30,19 +32,7 @@ object OnlineMangaSources : MangaSource {
 
     data class JikanRandomManga(
         @Json(name = "data")
-        val data: Manga
-    )
-
-    data class Manga(
-        @Json(name="mal_id")
-        val id : Int,
-
-        @Json(name="title")
-        val name : String,
-
-        @Json(name="volumes")
-        val tome : Int
-
+        val data: MangaModel
     )
 
     interface JikanMangaService{
@@ -54,7 +44,7 @@ object OnlineMangaSources : MangaSource {
         retrofit.create(JikanMangaService::class.java)
     }
 
-    override suspend fun GetRandomManga(): MangaModel {
+    override suspend fun GetRandom(): MangaModel {
         val nande =retrofitJikanMangaService.GetRandomManga()
             .data
 
@@ -71,6 +61,7 @@ object OnlineMangaSources : MangaSource {
 @Module
 object MangaSourceModule{
     @Provides
+    @Singleton
     fun provideMangaSource(): MangaSource {
         return OnlineMangaSources
     }
