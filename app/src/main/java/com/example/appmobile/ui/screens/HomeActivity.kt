@@ -32,8 +32,12 @@ fun Home(navController: NavController,modifier: Modifier = Modifier){
         .fillMaxHeight(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
-
+        Hometest()
 
     }
 }
 
+@Composable
+fun Hometest() {
+    Text(text = "Profile")
+}

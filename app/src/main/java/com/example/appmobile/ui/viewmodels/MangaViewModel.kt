@@ -1,6 +1,8 @@
 package com.example.appmobile.ui.viewmodels
 
 
+import android.util.Log
+
 import androidx.lifecycle.ViewModel
 
 import androidx.lifecycle.viewModelScope
@@ -22,10 +24,11 @@ class MangaViewModel @Inject constructor(private val mangaRepository:MangaReposi
     private fun getManga(){
         viewModelScope.launch {
         try {
+
             val randomManga = mangaRepository.GetRandomManga()
             _uiState.emit(MangaState(randomManga.name,randomManga.tome))
         }catch (e:Exception){
-
+            e.message?.let { Log.e("MangaViewModel", it) }
             }
         }
 

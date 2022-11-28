@@ -31,13 +31,13 @@ object OnlineMangaSources : MangaSource {
 
 
     data class JikanRandomManga(
-        @Json(name = "data")
+        @field:Json(name = "data")
         val data: MangaModel
     )
 
     interface JikanMangaService{
         @GET("/v4/random/manga")
-        fun GetRandomManga() : JikanRandomManga
+        suspend fun GetRandomManga() : JikanRandomManga
     }
 
     private val retrofitJikanMangaService:JikanMangaService by lazy{
@@ -45,10 +45,10 @@ object OnlineMangaSources : MangaSource {
     }
 
     override suspend fun GetRandom(): MangaModel {
-        val nande =retrofitJikanMangaService.GetRandomManga()
-            .data
-
-        return MangaModel(nande.id,nande.name,nande.tome)
+        return MangaModel(retrofitJikanMangaService.GetRandomManga()
+            .data.id,retrofitJikanMangaService.GetRandomManga()
+            .data.name,retrofitJikanMangaService.GetRandomManga()
+            .data.tome)
 
 
 
