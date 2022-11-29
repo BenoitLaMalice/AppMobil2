@@ -21,10 +21,9 @@ class MangaViewModel @Inject constructor(private val mangaRepository:MangaReposi
     private val _uiState= MutableStateFlow(MangaState())
     val uiState : StateFlow<MangaState> = _uiState.asStateFlow()
 
-    private fun getManga(){
+    private fun getRandomManga(){
         viewModelScope.launch {
         try {
-
             val randomManga = mangaRepository.GetRandomManga()
             _uiState.emit(MangaState(randomManga.name,randomManga.tome))
         }catch (e:Exception){
@@ -32,6 +31,9 @@ class MangaViewModel @Inject constructor(private val mangaRepository:MangaReposi
             }
         }
 
+    }
+    init {
+        getRandomManga()
     }
 
 }

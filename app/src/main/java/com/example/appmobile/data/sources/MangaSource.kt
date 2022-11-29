@@ -1,6 +1,7 @@
 package com.example.appmobile.data.sources
 
 
+import android.util.Log
 import com.example.appmobile.data.models.MangaModel
 import com.example.appmobile.data.repositories.DefaultMangaRepository
 import com.example.appmobile.data.repositories.MangaRepository
@@ -31,12 +32,12 @@ object OnlineMangaSources : MangaSource {
 
 
     data class JikanRandomManga(
-        @field:Json(name = "data")
+        @Json(name = "data")
         val data: MangaModel
     )
 
     interface JikanMangaService{
-        @GET("/v4/random/manga")
+        @GET("v4/random/manga")
         suspend fun GetRandomManga() : JikanRandomManga
     }
 
@@ -45,10 +46,13 @@ object OnlineMangaSources : MangaSource {
     }
 
     override suspend fun GetRandom(): MangaModel {
-        return MangaModel(retrofitJikanMangaService.GetRandomManga()
-            .data.id,retrofitJikanMangaService.GetRandomManga()
-            .data.name,retrofitJikanMangaService.GetRandomManga()
-            .data.tome)
+        val data=retrofitJikanMangaService.GetRandomManga()
+            .data
+        if (data.tome==null){
+            return MangaModel(data.id,data.name,0)
+        }
+        //data.id
+        return MangaModel(data.id,data.name,data.tome)
 
 
 
