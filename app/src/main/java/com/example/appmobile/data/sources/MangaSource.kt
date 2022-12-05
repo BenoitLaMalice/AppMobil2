@@ -19,7 +19,7 @@ import retrofit2.http.GET
 import javax.inject.Singleton
 
 
-object OnlineMangaSources : MangaSource {
+object OnlineMangaSources  {
     private const val BASE_URL = "https://api.jikan.moe"
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
@@ -45,14 +45,14 @@ object OnlineMangaSources : MangaSource {
         retrofit.create(JikanMangaService::class.java)
     }
 
-    override suspend fun GetRandom(): MangaModel {
+    suspend fun GetRandom(): MangaModel {
         val data=retrofitJikanMangaService.GetRandomManga()
             .data
         if (data.tome==null){
-            return MangaModel(data.id,data.name,0)
+            return MangaModel(data.mal_id,data.name,0)
         }
         //data.id
-        return MangaModel(data.id,data.name,data.tome)
+        return MangaModel(data.mal_id,data.name,data.tome)
 
 
 
@@ -61,12 +61,3 @@ object OnlineMangaSources : MangaSource {
 
 }
 
-@InstallIn(SingletonComponent::class)
-@Module
-object MangaSourceModule{
-    @Provides
-    @Singleton
-    fun provideMangaSource(): MangaSource {
-        return OnlineMangaSources
-    }
-}

@@ -10,13 +10,6 @@ interface AppContainer {
     val mangaRepository : MangaRepository
 
 
-    class DefaultAppContainer:AppContainer {
-        override val mangaSource: MangaSource by lazy {
-            OnlineMangaSources
-        }
-        override val mangaRepository:MangaRepository by lazy {
-            DefaultMangaRepository()
-    }
 
-    }
+
 }
