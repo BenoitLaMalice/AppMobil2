@@ -17,5 +17,7 @@ class RefreshMangaWorker(appContext: Context,params: WorkerParameters) : Corouti
 
     }
 
-
+    companion object {
+        const val WORK_NAME = "com.example.appmobile.work.RefreshMangaWorker"
+    }
 }

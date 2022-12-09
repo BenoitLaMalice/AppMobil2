@@ -48,12 +48,13 @@ object OnlineMangaSources  {
     suspend fun GetRandom(): MangaModel {
         val data=retrofitJikanMangaService.GetRandomManga()
             .data
-        if (data.tome==null){
+        if (data.volumes.equals(null)){
             return MangaModel(data.mal_id,data.name,0)
         }
-        //data.id
-        return MangaModel(data.mal_id,data.name,data.tome)
-
+        else {
+            //data.id
+            return MangaModel(data.mal_id, data.name, data.volumes)
+        }
 
 
 

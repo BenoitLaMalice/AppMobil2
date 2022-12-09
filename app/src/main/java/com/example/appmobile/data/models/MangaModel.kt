@@ -21,6 +21,6 @@ data class MangaModel(
 
     @ColumnInfo(name="volumes")
     @Json(name="volumes")
-    val tome : Int
+    val volumes : Int
 
 )

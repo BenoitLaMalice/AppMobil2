@@ -25,7 +25,14 @@ class MangaViewModel @Inject constructor(private val mangaRepository:MangaReposi
         viewModelScope.launch {
         try {
            mangaRepository.GetRandomManga().collect{
-               val uiManga=MangaState(it.name,it.tome)
+
+                    val uiManga : MangaState
+                    if(it.volumes==null) {
+                        uiManga = MangaState(it.name, 0)
+                    }
+                    else{
+                     uiManga =MangaState(it.name, it.volumes)
+                    }
                _uiState.emit(uiManga)
            }
 
